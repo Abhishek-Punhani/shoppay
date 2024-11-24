@@ -5,7 +5,14 @@ import { RiAccountPinCircleLine, RiArrowDropDownFill } from "react-icons/ri";
 import { BsSuitHeart } from "react-icons/bs";
 import { useState } from "react";
 import UserMenu from "./userMenu";
-function Top() {
+interface TopProps {
+  country: {
+    name: string;
+    flag: string;
+  };
+}
+
+function Top({ country }: TopProps) {
   const [loggedIn, setLoggedIn] = useState(true);
   const [showMenu, setShowMenu] = useState(false);
   return (
@@ -15,8 +22,8 @@ function Top() {
           <div></div>
           <ul className={styles.top__list}>
             <li className={styles.li}>
-              <img src={"/images/india.png"} alt="" />
-              <span>India / ₹</span>
+              <img src={country.flag} alt="" />
+              <span>{country.name} / ₹</span>
             </li>
             <li className={styles.li}>
               <MdSecurity />

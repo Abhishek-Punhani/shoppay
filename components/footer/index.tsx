@@ -6,7 +6,10 @@ import Socials from "./socials";
 import styles from "./styles.module.scss";
 
 interface FooterProps {
-  country: string;
+  country: {
+    name: string;
+    flag: string;
+  };
 }
 
 export default function Footer({ country }: FooterProps) {

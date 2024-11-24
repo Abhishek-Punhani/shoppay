@@ -2,7 +2,10 @@ import Link from "next/link";
 import { IoLocationSharp } from "react-icons/io5";
 import styles from "./styles.module.scss";
 interface props {
-  country: string;
+  country: {
+    name: string;
+    flag: string;
+  };
 }
 
 export default function Copyright({ country }: props) {
@@ -18,7 +21,7 @@ export default function Copyright({ country }: props) {
           ))}
           <li>
             <a>
-              <IoLocationSharp /> {country}
+              <IoLocationSharp /> {country.name}
             </a>
           </li>
         </ul>
