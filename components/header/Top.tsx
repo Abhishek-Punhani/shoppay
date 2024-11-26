@@ -5,6 +5,8 @@ import { RiAccountPinCircleLine, RiArrowDropDownFill } from "react-icons/ri";
 import { BsSuitHeart } from "react-icons/bs";
 import { useState } from "react";
 import UserMenu from "./userMenu";
+import { useSession } from "next-auth/react";
+import { Session } from "next-auth";
 interface TopProps {
   country: {
     name: string;
@@ -13,7 +15,7 @@ interface TopProps {
 }
 
 function Top({ country }: TopProps) {
-  const [loggedIn, setLoggedIn] = useState(true);
+  const { data: session } = useSession();
   const [showMenu, setShowMenu] = useState(false);
   return (
     <>
@@ -46,11 +48,11 @@ function Top({ country }: TopProps) {
               onMouseOver={() => setShowMenu(true)}
               onMouseLeave={() => setShowMenu(false)}
             >
-              {loggedIn ? (
+              {session ? (
                 <li className={styles.li}>
                   <div className={styles.flex}>
-                    <RiAccountPinCircleLine />
-                    <span>Abhishek</span>
+                    <img src={session.user?.image as string} alt="" />
+                    <span>{session.user?.name}</span>
                     <RiArrowDropDownFill />
                   </div>
                 </li>
@@ -63,7 +65,7 @@ function Top({ country }: TopProps) {
                   </div>
                 </li>
               )}
-              {showMenu && <UserMenu loggedIn={loggedIn} />}
+              {showMenu && <UserMenu session={session as Session} />}
             </li>
           </ul>
         </div>
